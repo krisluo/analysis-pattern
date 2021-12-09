@@ -1,0 +1,27 @@
+@startuml
+ class Client{}
+
+ class Receiver{
+    action()
+ }
+
+ interface Command{
+    execute()
+    undo()
+ }
+
+ class ConcreteCommand{
+    execute()
+    undo()
+ }
+
+ class Invoker{
+    setCommand()
+ }
+
+ Command <|.. ConcreteCommand
+ ConcreteCommand --> Receiver
+ Client --> Receiver
+ Client --> ConcreteCommand
+ Invoker --> Command
+@enduml
