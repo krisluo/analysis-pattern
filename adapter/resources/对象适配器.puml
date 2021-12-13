@@ -1,0 +1,23 @@
+@startuml
+
+    package 对象适配器{
+        class Client{}
+
+        interface Target{
+            request()
+        }
+
+        class Adapter{
+            request()
+        }
+
+        interface Adaptee{
+            specificRequest()
+        }
+
+        Client-->Target
+        Target<|..Adapter
+        Adapter-->Adaptee
+    }
+
+@enduml
