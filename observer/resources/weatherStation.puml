@@ -1,0 +1,61 @@
+@startuml
+
+    interface Subject{
+        registerObserver()
+        removeObserver()
+        notifyObservers()
+    }
+
+    class WeatherData{
+        registerObserver()
+        removeObserver()
+        notifyObservers()
+
+        getTemperature()
+        getHumidity()
+        getPressure()
+        measurementsChanged()
+    }
+
+    Subject <|.. WeatherData
+    Subject "1" --> "n" Observer
+
+    interface Observer{
+        update()
+    }
+
+    interface DisplayElement{
+        display()
+    }
+
+    class CurrentConditionsDisplay{
+        update()
+        display()
+    }
+
+    CurrentConditionsDisplay --> Subject
+
+    Observer <|.. CurrentConditionsDisplay
+    DisplayElement <|.. CurrentConditionsDisplay
+
+    class StatisticDisplay{
+        update()
+        display()
+    }
+    Observer <|.. StatisticDisplay
+    DisplayElement <|.. StatisticDisplay
+
+    class ForecastDisplay{
+        update()
+        display()
+    }
+    Observer <|.. ForecastDisplay
+    DisplayElement <|.. ForecastDisplay
+
+    class ThirdPartyDisplay{
+        update()
+        display()
+    }
+    Observer <|.. ThirdPartyDisplay
+    DisplayElement <|.. ThirdPartyDisplay
+@enduml
