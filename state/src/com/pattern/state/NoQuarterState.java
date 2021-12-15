@@ -3,7 +3,7 @@ package com.pattern.state;
 import com.pattern.GumballMachine;
 
 public class NoQuarterState implements State {
-    GumballMachine gumballMachine;
+    transient GumballMachine gumballMachine;
 
     public NoQuarterState(GumballMachine gumballMachine) {
         this.gumballMachine = gumballMachine;
@@ -40,5 +40,10 @@ public class NoQuarterState implements State {
     @Override
     public void dispense() {
         System.out.println("You need to pay first");
+    }
+
+    @Override
+    public String toString() {
+        return "waiting for quarter";
     }
 }
