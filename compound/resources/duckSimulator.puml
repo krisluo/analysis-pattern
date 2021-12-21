@@ -1,0 +1,99 @@
+@startuml
+class DuckSimulator{}
+
+interface AbstractDuckFactory{
+    createMallardDuck()
+    createRedheadDuck()
+    createDuckCall()
+    createRubberDuck()
+}
+
+class DuckFactory{
+    createMallardDuck()
+    createRedheadDuck()
+    createDuckCall()
+    createRubberDuck()
+}
+
+class CountingDuckFactory{
+    createMallardDuck()
+    createRedheadDuck()
+    createDuckCall()
+    createRubberDuck()
+}
+
+AbstractDuckFactory <|.. DuckFactory
+AbstractDuckFactory <|.. CountingDuckFactory
+
+interface QuackObservable{
+    registerObserver(QuackObserver)
+    notifyObservers()
+}
+
+class Observable{
+    ArrayList observers
+    QuackObservable duck
+
+    registerObserver(QuackObserver)
+    notifyObservers()
+}
+
+QuackObservable <|.. Observable
+Observable --> QuackObservable
+
+interface Quackable{
+    quack()
+}
+QuackObservable <|-- Quackable
+
+class MallardDuck{}
+class RedheadDuck{}
+class DuckCall{}
+class RubberDuck{}
+
+Quackable <|.. MallardDuck
+Quackable <|.. RedheadDuck
+Quackable <|.. DuckCall
+Quackable <|.. RubberDuck
+MallardDuck --> Observable
+RedheadDuck --> Observable
+DuckCall --> Observable
+RubberDuck --> Observable
+
+class GooseAdapter{
+    Goose goose
+}
+Quackable <|.. GooseAdapter
+GooseAdapter --> Observable
+
+class QuackCounter{
+    Quackable duck
+
+    getQuacks()
+}
+
+Quackable <|.. QuackCounter
+
+class Flock{
+    ArrayList<Quackable> ducks
+
+    add(Quackable)
+}
+
+Quackable <|.. Flock
+
+interface Observer{
+    update(QuackObservable)
+}
+
+class Quackologist{
+    update(QuackObservable)
+}
+
+Observer <|.. Quackologist
+Observer --> QuackObservable
+
+DuckSimulator --> AbstractDuckFactory
+DuckSimulator --> Quackable
+DuckSimulator --> Quackologist
+@enduml
